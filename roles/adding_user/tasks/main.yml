@@ -1,0 +1,8 @@
+---
+# tasks file for adding_user
+- name: Create a login user
+  user: 
+    name: {{username}} 
+    groups: {{group_name}}
+    shell: /bin/bash
+    password: {{user_pass}}

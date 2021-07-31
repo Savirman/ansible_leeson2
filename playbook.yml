@@ -1,0 +1,22 @@
+---
+- name: Adding user
+  hosts: centos_prodservers
+  become: yes
+
+  vars:
+    nginx_port: 80
+  
+  tasks:
+  - name: Creating nginx configuration file
+    template: src=/root/ansible2/roles/common/template/hginx.j2 dest=/etc/nginx/conf.d/nginx.conf
+  - name: Installing docker
+    yum: name=docker state=latest
+  - name: Start docker and adding to auto launch
+    service: name=docker state=started enabled=yes
+  - name: Pull docker-image of RabbitMQ
+    docker_image: name=rabbitmq source=pull
+  - name: Creating RabbitMQ container
+    docker_container: name=rabbitmq:v1 image=rabbitmq state=present
+
+  roles:
+    - adding_user

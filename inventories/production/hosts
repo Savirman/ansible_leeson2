@@ -1,0 +1,4 @@
+[centos_prodservers]
+centos1 ansible_host=192.168.71.4
+centos2 ansible_host=192.168.71.5
+centos3 ansible_host=192.168.71.6
